@@ -3,7 +3,9 @@
         <h1>Ibrahim's Blog</h1>
 
         <div v-for="post in posts" :key="post.id" class="post-card">
-            <h2>{{ post.title }}</h2>
+            <Link :href="`/posts/${post.id}`">
+                <h2>{{ post.title }}</h2>
+            </Link>
             <p>{{ post.body.substring(0, 150) }}...</p>
             <small>{{ new Date(post.created_at).toLocaleDateString() }}</small>
         </div>
@@ -11,6 +13,8 @@
 </template>
 
 <script setup>
+    import { Link } from '@inertiajs/vue3';
+
     defineProps({
         posts: Array
     })
