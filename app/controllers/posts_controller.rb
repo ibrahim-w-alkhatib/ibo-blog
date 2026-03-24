@@ -11,4 +11,39 @@ class PostsController < ApplicationController
       post: post
     }
   end
+
+  def new
+    render inertia: "Posts/New"
+  end
+
+  def create
+    post = Post.new(post_params)
+    if post.save
+      redirect_to post, notice: "Post created successfully."
+    else
+      redirect_back fallback_location: new_post_path, errors: post.errors
+    end
+  end
+
+  def edit
+    post = Post.find(params[:id])
+    render inertia: "Posts/Edit", props: {
+      post: post
+    }
+  end
+
+  def update
+    post = Post.find(params[:id])
+    if post.update(post_params)
+      redirect_to post, notice: "Post updated successfully."
+    else
+      redirect_back fallback_location: edit_post_path(post), errors: post.errors
+    end
+  end
+
+    private
+
+  def post_params
+    params.require(:post).permit(:title, :body, :published)
+  end
 end
