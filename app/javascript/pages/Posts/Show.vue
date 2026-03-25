@@ -1,16 +1,26 @@
 <template>
-  <div>
-    <Link href="/" class="back-link">← Back to all posts</Link>
+  <div class="animate-fade-in">
+    <Link href="/" class="text-gray-500 no-underline hover:text-blue-400 text-sm transition-colors duration-200">← Back to all posts</Link>
 
-    <article>
-      <h1>{{ post.title }}</h1>
-      <small>{{ new Date(post.created_at).toLocaleDateString() }}</small>
-      <div class="body">{{ post.body }}</div>
+    <article class="mt-8">
+      <h1 class="text-4xl font-bold text-gray-100 mb-3">{{ post.title }}</h1>
+      <small class="text-gray-500">{{ new Date(post.created_at).toLocaleDateString() }}</small>
+      <div class="mt-8 text-gray-300 leading-relaxed text-lg whitespace-pre-wrap">{{ post.body }}</div>
     </article>
 
-    <div class="actions">
-      <Link :href="`/posts/${post.id}/edit`" class="edit-btn">Edit</Link>
-      <button @click="deletePost" class="delete-btn">Delete</button>
+    <div class="mt-10 pt-6 border-t border-gray-800 flex gap-3">
+      <Link
+        :href="`/posts/${post.id}/edit`"
+        class="bg-gray-800 text-gray-300 px-4 py-2 rounded-lg no-underline hover:bg-gray-700 hover:text-white transition-all duration-200"
+      >
+        Edit
+      </Link>
+      <button
+        @click="deletePost"
+        class="bg-red-500/10 text-red-400 border border-red-500/20 px-4 py-2 rounded-lg hover:bg-red-500/20 transition-all duration-200 cursor-pointer"
+      >
+        Delete
+      </button>
     </div>
   </div>
 </template>
@@ -29,60 +39,13 @@ const deletePost = () => {
 }
 </script>
 
-<style scoped>
-.back-link {
-  display: inline-block;
-  margin-bottom: 16px;
-  color: #666;
-  text-decoration: none;
+<style>
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.back-link:hover {
-  color: #333;
-}
-
-article h1 {
-  margin: 0 0 8px 0;
-}
-
-article small {
-  color: #999;
-}
-
-.body {
-  margin-top: 16px;
-  line-height: 1.6;
-}
-
-.actions {
-  margin-top: 24px;
-  display: flex;
-  gap: 12px;
-}
-
-.edit-btn {
-  background: #2563eb;
-  color: white;
-  padding: 8px 16px;
-  border-radius: 4px;
-  text-decoration: none;
-}
-
-.edit-btn:hover {
-  background: #1d4ed8;
-}
-
-.delete-btn {
-  background: #dc2626;
-  color: white;
-  padding: 8px 16px;
-  border-radius: 4px;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.delete-btn:hover {
-  background: #b91c1c;
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
 }
 </style>

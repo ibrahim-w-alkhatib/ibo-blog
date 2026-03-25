@@ -1,24 +1,34 @@
 <template>
-  <div class="app">
-    <nav class="navbar">
-      <Link href="/" class="logo">Ibo's Blog</Link>
-      <div class="nav-links">
-        <Link href="/">Home</Link>
-        <Link href="/posts/new">New Post</Link>
+  <div class="min-h-screen bg-gray-950 text-gray-100">
+    <nav class="border-b border-gray-800/50 backdrop-blur-sm bg-gray-950/80 sticky top-0 z-10">
+      <div class="max-w-3xl mx-auto px-4 py-4 flex justify-between items-center">
+        <Link href="/" class="text-xl font-bold no-underline bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent hover:from-blue-300 hover:to-violet-300 transition-all duration-300">
+          Ibo's Blog
+        </Link>
+        <div class="flex gap-4">
+          <Link href="/" class="text-gray-400 no-underline hover:text-white transition-colors duration-200">Home</Link>
+          <Link href="/posts/new" class="bg-blue-600 text-white no-underline px-3 py-1 rounded-lg text-sm hover:bg-blue-500 transition-colors duration-200">
+            + New Post
+          </Link>
+        </div>
       </div>
     </nav>
 
-    <div v-if="flashNotice" class="flash notice">
-      {{ flashNotice }}
-    </div>
+    <div class="max-w-3xl mx-auto px-4 py-10">
+      <transition name="flash">
+        <div v-if="flashNotice" class="bg-green-500/10 border border-green-500/20 text-green-400 px-4 py-3 rounded-xl mb-6">
+          {{ flashNotice }}
+        </div>
+      </transition>
 
-    <div v-if="flashAlert" class="flash alert">
-      {{ flashAlert }}
-    </div>
+      <transition name="flash">
+        <div v-if="flashAlert" class="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-3 rounded-xl mb-6">
+          {{ flashAlert }}
+        </div>
+      </transition>
 
-    <main class="content">
       <slot />
-    </main>
+    </div>
   </div>
 </template>
 
@@ -32,71 +42,18 @@ const flashAlert = computed(() => page.props.flash?.alert)
 </script>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.flash-enter-active {
+  transition: all 0.4s ease-out;
 }
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  color: #333;
-  background: #f9fafb;
+.flash-leave-active {
+  transition: all 0.3s ease-in;
 }
-
-.app {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 20px;
+.flash-enter-from {
+  opacity: 0;
+  transform: translateY(-10px);
 }
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 0;
-  border-bottom: 1px solid #e5e7eb;
-  margin-bottom: 32px;
-}
-
-.logo {
-  font-size: 1.4em;
-  font-weight: 700;
-  color: #111;
-  text-decoration: none;
-}
-
-.nav-links {
-  display: flex;
-  gap: 16px;
-}
-
-.nav-links a {
-  color: #2563eb;
-  text-decoration: none;
-}
-
-.nav-links a:hover {
-  text-decoration: underline;
-}
-
-.flash {
-  padding: 12px;
-  border-radius: 8px;
-  margin-bottom: 16px;
-}
-
-.flash.notice {
-  background: #dcfce7;
-  color: #166534;
-}
-
-.flash.alert {
-  background: #fef2f2;
-  color: #991b1b;
-}
-
-.content {
-  padding-bottom: 40px;
+.flash-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
 }
 </style>
