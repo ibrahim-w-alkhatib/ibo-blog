@@ -5,8 +5,9 @@
         <Link href="/" class="text-xl font-bold no-underline bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent hover:from-blue-300 hover:to-violet-300 transition-all duration-300">
           Ibo's Blog
         </Link>
-        <div class="flex gap-4">
+        <div class="flex gap-4 items-center">
           <Link href="/" class="text-gray-400 no-underline hover:text-white transition-colors duration-200">Home</Link>
+          <Link href="/about" class="text-gray-400 no-underline hover:text-white transition-colors duration-200">About</Link>
           <Link href="/posts/new" class="bg-blue-600 text-white no-underline px-3 py-1 rounded-lg text-sm hover:bg-blue-500 transition-colors duration-200">
             + New Post
           </Link>

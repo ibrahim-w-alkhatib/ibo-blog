@@ -1,7 +1,5 @@
 class PagesController < ApplicationController
-  def home
-    render inertia: "Home", props: {
-      posts: Post.where(published: true)
-    }
+  def about
+    render inertia: "About"
   end
 end

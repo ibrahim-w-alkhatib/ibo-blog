@@ -5,7 +5,7 @@
     <article class="mt-8">
       <h1 class="text-4xl font-bold text-gray-100 mb-3">{{ post.title }}</h1>
       <small class="text-gray-500">{{ new Date(post.created_at).toLocaleDateString() }}</small>
-      <div class="mt-8 text-gray-300 leading-relaxed text-lg whitespace-pre-wrap">{{ post.body }}</div>
+      <div class="mt-8 text-gray-300 leading-relaxed text-lg prose prose-invert prose-lg" v-html="post.body_html"></div>
     </article>
 
     <div class="mt-10 pt-6 border-t border-gray-800 flex gap-3">

@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   def show
     post = Post.find(params[:id])
     render inertia: "Posts/Show", props: {
-      post: post
+      post: post.as_json.merge(body_html: post.body_html)
     }
   end
 
