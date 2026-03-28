@@ -1,7 +1,23 @@
 class PostsController < ApplicationController
   def index
+    posts = Post.order(created_at: :desc)
+
+    if params[:search].present?
+      posts = posts.where("title LIKE ?", "%#{params[:search]}%")
+    end
+
+    if params[:status] == "published"
+      posts = posts.where(published: true)
+    elsif params[:status] == "draft"
+      posts = posts.where(published: false)
+    end
+
     render inertia: "Posts/Index", props: {
-      posts: Post.where(published: true).order(created_at: :desc)
+      posts: posts,
+      filters: {
+        search: params[:search] || "",
+        status: params[:status] || "all"
+      }
     }
   end
 
