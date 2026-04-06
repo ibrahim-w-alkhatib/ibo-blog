@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    posts = Post.order(created_at: :desc)
+    posts = Post.order(protected: :desc, created_at: :desc)
 
     if params[:search].present?
       posts = posts.where("title LIKE ?", "%#{params[:search]}%")
@@ -43,6 +43,7 @@ class PostsController < ApplicationController
 
   def edit
     post = Post.find(params[:id])
+    return redirect_to post, alert: 'This post is protected.' if post.protected?
     render inertia: "Posts/Edit", props: {
       post: post
     }
@@ -50,6 +51,7 @@ class PostsController < ApplicationController
 
   def update
     post = Post.find(params[:id])
+    return redirect_to post, alert: 'This post is protected.' if post.protected?
     if post.update(post_params)
       redirect_to post, notice: "Post updated successfully."
     else
@@ -59,6 +61,7 @@ class PostsController < ApplicationController
 
   def destroy
     post = Post.find(params[:id])
+    return redirect_to post, alert: 'This post is protected.' if post.protected?
     post.destroy
     redirect_to root_path, notice: "Post deleted successfully."
   end

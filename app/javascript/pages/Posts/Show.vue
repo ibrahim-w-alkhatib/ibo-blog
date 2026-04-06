@@ -8,7 +8,7 @@
       <div class="mt-8 text-gray-300 leading-relaxed text-lg prose prose-invert prose-lg" v-html="post.body_html"></div>
     </article>
 
-    <div class="mt-10 pt-6 border-t border-gray-800 flex gap-3">
+    <div v-if="!post.protected" class="mt-10 pt-6 border-t border-gray-800 flex gap-3">
       <Link
         :href="`/posts/${post.id}/edit`"
         class="bg-gray-800 text-gray-300 px-4 py-2 rounded-lg no-underline hover:bg-gray-700 hover:text-white transition-all duration-200"
