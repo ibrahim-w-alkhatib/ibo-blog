@@ -63,6 +63,6 @@ end
 
 gem "vite_rails", "~> 3.0"
 
-gem "inertia_rails", "~> 3.18"
+gem "inertia_rails", "~> 3.21"
 
 gem "redcarpet", "~> 3.6"
